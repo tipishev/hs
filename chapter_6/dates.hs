@@ -18,6 +18,10 @@ instance Eq DayOfWeek where
 
 
 instance Eq Date where
-  (==) (Date weekday dayOfMonth)
-       (Date otherWeekday otherDayOfMonth) =
+  (==) (Date weekday dayOfMonth) (Date otherWeekday otherDayOfMonth) =
      weekday == otherWeekday && dayOfMonth == otherDayOfMonth
+
+{- -- example of non-exhaustive function -}
+{- f :: Int -> Bool -}
+{- f 1 = True -}
+{- f _ = False -}
