@@ -46,3 +46,28 @@ equalityForall p p' = p == p'
 
 comparePapus :: Papu -> Papu -> Bool
 comparePapus p p' = p > p'
+
+-- Match the Types
+
+i :: Num a => a
+{- i :: a -}
+i = 1
+
+{- f :: Float -}
+{- f :: Fractional a => a -}
+f :: RealFrac a => a
+f = 1.0
+
+{- freud :: a -> a -}
+freud :: Ord a => a -> a
+freud x = x
+
+{- freud' :: a -> a -}
+freud' :: Int -> Int
+{- freud' :: Num a => a -> a -}
+freud' x = x
+
+myX = 1 :: Int
+{- sigmund :: Int -> Int -}
+sigmund :: a -> a
+sigmund x = myX
