@@ -1,4 +1,7 @@
+
 module EndOfChapter where
+
+import Data.List (sort)
 
 {- x :: Int -> Int -}
 {- x blah = blah + 20 -}
@@ -68,6 +71,37 @@ freud' :: Int -> Int
 freud' x = x
 
 myX = 1 :: Int
-{- sigmund :: Int -> Int -}
-sigmund :: a -> a
+sigmund :: Int -> Int
+{- sigmund :: a -> a -}
 sigmund x = myX
+
+{- Neither works -}
+{- sigmund' :: Int -> Int -}
+{- sigmund' :: Num a => a -> a -}
+sigmund' = myX
+
+{- jung :: Ord a => [a] -> a -}
+jung :: [Int] -> Int
+jung xs = head (sort xs)
+
+{- young :: [Char] -> Char -}
+young :: Ord a => [a] -> a
+young xs = head (sort xs)
+
+{- mySort :: [Char] -> [Char] -}
+mySort :: Ord a => [a] -> [a]
+mySort = sort
+
+{- signifier :: [Char] -> Char -}
+signifier :: Ord a => [a] -> a
+signifier xs = head (mySort xs)
+
+
+-- Type-Kwon-Do
+chk :: Eq b => (a -> b) -> a -> b -> Bool
+chk f a b = f a == b
+
+-- Hint: use some arithmetic operation to
+-- combine values of type 'b'. Pick one.
+arith :: Num b => (a -> b) -> Integer -> a -> b
+arith f n a = (f a) ^ n
