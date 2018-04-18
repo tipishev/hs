@@ -16,4 +16,7 @@ module GrabBag where
   addFive' y = \x -> (if x > y then y else x) + 5
   addFive'' = \y -> \x -> (if x > y then y else x) + 5
 
+  mflip f = \x -> \y -> f y x
+  mflip' f x y = f y x
+
 
