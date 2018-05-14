@@ -19,7 +19,21 @@ module Exercises where
   sumTo 0 = 0
   sumTo n = n + sumTo(n-1)
 
-  -- FIXME handle negative numbers 
-  multi :: (Integral a) => a -> a -> a
-  multi a 1 = a
-  multi a b = a + multi a (b - 1)
+  -- recursion 3
+  multi :: Integral a => a -> a -> a
+  multi a b
+    | b == 1 = a
+    | b == 0 = 0
+    | a > 0 && b < 0 = - multi a (-b)
+    | a < 0 && b > 0 = multi b a
+    | a < 0 && b < 0 = multi (-a) (-b)
+    | otherwise = a + multi a (b - 1)
+
+  -- Fixing dividedBy
+  div' :: Integral a => a -> a -> (a, a)
+  div' numerator denominator
+     {- | numerator > 0 && denominator < 0 = div' numerator (-denominator) -}  -- need to access tuple second element
+     | otherwise = go numerator denominator 0
+   where go n d count
+          | n < d = (count, n)
+          | otherwise = go (n - d) d (count + 1)
