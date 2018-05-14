@@ -30,10 +30,22 @@ module Exercises where
     | otherwise = a + multi a (b - 1)
 
   -- Fixing dividedBy
-  div' :: Integral a => a -> a -> (a, a)
+  data DividedResult =
+    Result Integer
+    | DividedByZero deriving (Show, Eq)
+
+
+  neg:: DividedResult -> DividedResult
+  neg DividedByZero = DividedByZero
+  neg (Result x) = Result (-x)
+
+  div' :: (Real a, Enum a) => a -> a -> DividedResult
   div' numerator denominator
-     {- | numerator > 0 && denominator < 0 = div' numerator (-denominator) -}  -- need to access tuple second element
+     | denominator == 0 = DividedByZero
+     | numerator < 0 && denominator < 0 = div' (-numerator) (-denominator)
+     | numerator > 0 && denominator < 0 = neg $ div' numerator (-denominator)
+     | numerator < 0 && denominator > 0 = neg $ div' (-numerator) denominator
      | otherwise = go numerator denominator 0
    where go n d count
-          | n < d = (count, n)
+          | n < d = Result count
           | otherwise = go (n - d) d (count + 1)
